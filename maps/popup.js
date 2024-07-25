@@ -14,6 +14,7 @@ document.getElementById('scrape').addEventListener('click', () => {
     let businessesData = '';
     businesses.forEach(business => {
       businessesData += business.innerText + '\n';
+      businessesData += '---------' + '\n';
     });
     return businessesData;
   }
