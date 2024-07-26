@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        const data = [
+            "Q939+8JR Narain Tower, Gandhi Gali, Golghar, Gorakhpur, Uttar Pradesh 273001",
+            "Place an order",
+            "Menu",
+            "buffettree.com",
+            "088811 12672",
+            "Send to your phone",
+            "Your Maps activity"
+        ]
+
+        function extractPhoneNumber(array) {
+            const phoneNumberRegex = /\b\d{11}\b/;
+
+            for (const item of array) {
+                if (typeof item === 'string') {
+                    // Remove all whitespace from the string
+                    const itemWithoutSpaces = item.replace(/\s+/g, '');
+                    // Match the phone number pattern
+                    const match = itemWithoutSpaces.match(phoneNumberRegex);
+                    if (match) {
+                        return match[0];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        function extractWebsite(array) {
+            const websiteRegex = /\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}\b/;
+
+
+            for (const item of array) {
+                if (typeof item === 'string') {
+                    const match = item.match(websiteRegex);
+                    if (match) {
+                        return match[0];
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        const phone = extractPhoneNumber(data);
+        const website = extractWebsite(data);
+        console.log(phone);
+        console.log(website); 
+
+
+
+
+    </script>
+</body>
+
+</html>
