@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
   
-document.getElementById("scrapeButton").addEventListener("click", async () => {
-  // Get the active tab
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  // Send a message to the content script to start scraping
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: scrapeData,
+  document.getElementById('scrapeButton').addEventListener('click', () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        function: scrapeData
+      }, (results) => {
+        document.getElementById('result').textContent = results[0].result;
+      });
+    });
   });
-});
 
 // This function will be executed as a content script inside the current page
 async function scrapeData() {
@@ -42,7 +42,6 @@ async function scrapeData() {
       address: fontBodyMediumTexts[0],
     });
 
-    window.history.back();
     await delay(2000);
   }
 
@@ -93,7 +92,8 @@ async function scrapeData() {
   });
   
   console.log(csvContent);
-  document.getElementById("result").textContent = csvContent;
+
+  return csvContent;
 }
 
 });

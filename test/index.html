@@ -9,6 +9,8 @@
 
 <body>
 
+    <h1 id="heading"></h1>
+
 
     <script>
         const data = [
@@ -35,13 +37,13 @@
                     }
                 }
             }
-
+            
             return null;
         }
-
+        
         function extractWebsite(array) {
             const websiteRegex = /\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}\b/;
-
+            
 
             for (const item of array) {
                 if (typeof item === 'string') {
@@ -51,18 +53,17 @@
                     }
                 }
             }
-
+            
             return null;
         }
-
+        
         const phone = extractPhoneNumber(data);
         const website = extractWebsite(data);
         console.log(phone);
-        console.log(website); 
-
-
-
-
+        
+        let heading=  document.getElementById('heading')
+        heading.textContent = phone
+        
     </script>
 </body>
 
